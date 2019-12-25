@@ -76,12 +76,12 @@ var game = {
         // creating a timer
         timer = setInterval(game.countdown, 1000);
         // creates the timer to the DOM, & setting id(counter)
-        $("#sub-wrapper").prepend("<h2>Time Remaining: <span id='counter'> 120 </span> Seconds </h2>")
+        $("#sub-wrapper").append("<h2>Time Remaining: <span id='counter'> 120 </span> Seconds </h2>")
         $('#start').remove();
         for (var q = 0; q < questions.length; q++) {
             $('#sub-wrapper').append("<h3>" + questions[q].question + "</h3>");
             for (var a = 0; a < questions[q].answers.length; a++) {
-                $("#sub-wrapper").append("<input type ='radio' name ='question-" + q + "' value = '" + questions[q].answers[a] + "'>" + questions[q].answers[a]);
+                $("#sub-wrapper").append("<input type ='radio' name ='question-" + q + "' value = '" + questions[q].answers[a] + "'>" + questions[q].answers[a] + "<br>");
             }
         } // CREATES THE DONE BUTTON IN THE DOM
         $("#sub-wrapper").append("<br> <button id = 'done'> Done </button>");
