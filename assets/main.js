@@ -1,4 +1,4 @@
-var quizCard = $(".quiz-area")
+// ARRAYS OF QUESTIONS AND ANSWERS
 
 var questions = [
     {
@@ -12,7 +12,7 @@ var questions = [
         correct: "Lion",
     },
     {
-        question: "Who is the all time scroing leader in the NBA?",
+        question: "Who is the all time scoring leader in the NBA?",
         answers: ["Micheal Jordan", "Lebron James", "Kareem Abdul-Jabbar", "Wilt Chamberlin"],
         correct: "Kareem Abdul-Jabbar",
     },
@@ -21,36 +21,41 @@ var questions = [
         answers: ["Boston Celtics", "LA Lakers", "San Antonio Spurs", "Golden States Warriors"],
         correct: "Boston Celtics",
     },
+    {
+        question: "Who is the first player to be drafted #1 without playing college or high school basketball in the U.S.?",
+        answers: ["Joel Emib", "Yao Ming", "Tim Duncan", "Tony Parker"],
+        correct: "Yao Ming",
+    },
+    {
+        question: "Who is the shortest player of all-time?",
+        answers: ["Spud Webb", "Allen Iverson", "Nate Robinson", "Tyrone Bogues"],
+        correct: "Tyrone Bogues",
+    },
+    {
+        question: "Most coaching titles?",
+        answers: ["Phil Jackson", "Gregg Popovich", "Pat Reily", "Steve Kerr"],
+        correct: "Phil Jackson",
+    },
+    {
+        question: "What player has the highest career FT percentage?",
+        answers: ["Steve Kerr", "Steve Nash", "Steph Curry", "Damion Lillard"],
+        correct: "Steve Nash",
+    },
+    {
+        question: "What player has the highest career PPG?",
+        answers: ["Micheal Jordan", "Wilt Chamberlin", "Kobe Bryant", "James Harden"],
+        correct: "Micheal Jordan",
+    },
+    {
+        question: "Who has the most coaching wins?",
+        answers: ["Phil Jackson", "Gregg Popovich", "Don Nelson", "Rick Adleman"],
+        correct: "Don Nelson",
+    },
 ]
 
-
-var intervalId;
-
-
-// // TIMER
-// function start() {
-//     clearInterval(intervalId);
-//     intervalId = setInterval(decrement, 1000);
-// }
-// function decrement() {
-//     timer--;
-//     $('.timer').text(timer)
-//     if (timer === 0) {
-//         stop();
-//     }
-// }
-// decrement();
-// function stop() {
-//     clearInterval(intervalId);
-// };
-// start()
-
-
-$('#start').on('click', function () {
-    game.start();
-});
 // holds the set interval
 var timer;
+
 // creates the game
 var game = {
     correct: 0,
@@ -69,7 +74,7 @@ var game = {
     }, // function to start the game
     start: function () {
         // creating a timer
-        timer = setInterval(game.countdown, 100);
+        timer = setInterval(game.countdown, 1000);
         // creates the timer to the DOM, & setting id(counter)
         $("#sub-wrapper").prepend("<h2>Time Remaining: <span id='counter'> 120 </span> Seconds </h2>")
         $('#start').remove();
@@ -78,8 +83,8 @@ var game = {
             for (var a = 0; a < questions[q].answers.length; a++) {
                 $("#sub-wrapper").append("<input type ='radio' name ='question-" + q + "' value = '" + questions[q].answers[a] + "'>" + questions[q].answers[a]);
             }
-        }
-        $("#sub-wrapper").append("<button id = 'done'> Done </button>");
+        } // CREATES THE DONE BUTTON IN THE DOM
+        $("#sub-wrapper").append("<br> <button id = 'done'> Done </button>");
     }, // done function to check each value of the checked input
     done: function () {
         var inputs = $("#sub-wrapper").children("input:checked");
@@ -91,7 +96,7 @@ var game = {
                 game.incorrect++;
             }
         }
-        this.result();
+        this.result(); // THE RESULT FUNCTION IS RAN HERE ONCE DONE BUTTON IS CLICK
     },
     result: function () {
         clearInterval(timer);
@@ -103,7 +108,13 @@ var game = {
         $("#sub-wrapper").append("<h3> Incorrect Answers: " + this.incorrect + "</h3>")
     }
 };
-// clicks on done button to finish the game
+
+// START BUTTON TO START THE GAME
+$('#start').on('click', function () {
+    game.start(); // THE GAME FUNCTION IS RAN HERE
+});
+
+// DONE - TO FINISH THE GAME
 $(document).on('click', "#done", function () {
     game.done();
 });
